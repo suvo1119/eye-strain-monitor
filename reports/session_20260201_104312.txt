@@ -1,0 +1,12 @@
+Eye Strain Session Report
+Start: 2026-02-01T10:43:12.447044
+End: 2026-02-01T10:43:54.666055
+Duration (s): 42.2
+
+Total frames: 427
+Total blinks: 22
+Blinks/min: 31.27
+Avg blink duration (ms): 304.4
+PERCLOS (%): 100.00
+Avg EAR: 0.3284
+Final strain level: Mild

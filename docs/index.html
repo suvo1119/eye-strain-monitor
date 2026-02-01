@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eye Strain Monitor — Live Demo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">👁️ Eye Strain Monitor</div>
+      <span class="navbar-info">Real-time eye health tracking</span>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <section class="hero">
+      <h1>Eye Strain Detector</h1>
+      <p>Monitor your eye health in real-time. Press Start and allow camera access.</p>
+    </section>
+
+    <div class="grid-layout">
+      <!-- Video & Controls Panel -->
+      <section class="card video-card">
+        <div class="card-header">
+          <h2>Live Camera Feed</h2>
+          <span id="status" class="status-badge">Idle</span>
+        </div>
+
+        <div class="control-group">
+          <div class="button-row">
+            <button id="startBtn" class="btn btn-primary">Start Monitor</button>
+            <button id="stopBtn" class="btn btn-secondary" disabled>Stop</button>
+          </div>
+          
+          <div class="control-row">
+            <div class="select-wrapper">
+              <label for="cameraSelect">Camera</label>
+              <select id="cameraSelect"></select>
+            </div>
+            <button id="refreshCams" class="btn btn-icon" title="Refresh camera list">🔄</button>
+            <button id="requestPerm" class="btn btn-icon" title="Request camera permission">🔐</button>
+          </div>
+
+          <div id="errorMsg" class="error-message"></div>
+        </div>
+
+        <div class="video-wrap">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Total Blinks</div>
+            <div class="metric-value" id="blinksTotal">0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Blinks/min</div>
+            <div class="metric-value" id="blinksPerMin">0.0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">PERCLOS (%)</div>
+            <div class="metric-value" id="perclos">0.0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Strain Level</div>
+            <div class="metric-value strain-indicator" id="strain">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Report Panel -->
+      <section class="card report-card" id="reportPanel" aria-hidden="true">
+        <div class="card-header">
+          <h2>Session Report</h2>
+        </div>
+
+        <div id="reportSummary" class="report-summary">
+          <p class="empty-state">Start the monitor to generate a report</p>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="chart"></canvas>
+        </div>
+
+        <div class="report-actions" id="reportActions" style="display:none;">
+          <button id="downloadTxt" class="btn btn-small">📥 Download TXT</button>
+          <button id="downloadCsv" class="btn btn-small">📥 Download CSV</button>
+          <button id="copyReport" class="btn btn-small">📋 Copy Report</button>
+        </div>
+
+        <details class="report-details">
+          <summary>View Raw Data</summary>
+          <pre id="rawReport" class="rawreport"></pre>
+        </details>
+
+        <p class="info-text">💡 Tip: Rotate your device on mobile for better framing.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>MediaPipe Face Mesh • No data is stored or transmitted • Best on Chrome/Edge</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
